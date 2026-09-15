@@ -19,7 +19,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     super.dispose();
   }
 
-  void _saveTask() {
+Future<void> _saveTask() async {
   final title = _titleController.text.trim();
   final description = _descriptionController.text.trim();
 
@@ -32,10 +32,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     return;
   }
 
-  taskManager.addTask(
+  await taskManager.addTask(
     title: title,
     description: description.isEmpty ? null : description,
   );
+
+  if (!mounted) return;
 
   Navigator.pop(context);
 }

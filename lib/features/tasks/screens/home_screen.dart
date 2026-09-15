@@ -55,11 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListTile(
                     leading: Checkbox(
                       value: task.isCompleted,
-                      onChanged: (_) {
-                        setState(() {
-                          taskManager.toggleTask(task.id);
-                        });
-                      },
+                      onChanged: (_) async {
+                      await taskManager.toggleTask(task.id);
+                      if (!mounted) return;
+                      setState(() {});
+                    },
                     ),
                     title: Text(
                       task.title,
